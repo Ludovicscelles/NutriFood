@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nutrifood</title>
+  </head>
+  <body>
+    <h1>Bienvenue sur Nutrifood</h1>
+    <form method="get" action="{% url 'search:recherche_produit' %}">
+      <label for="nom">Nom du produit :</label>
+      <input type="text" id="q" name="q" value="{{ query|default:'' }}"/>
+      <button type="submit">Rechercher</button>
+    </form>
+    {% if produits %}
+    <h2>Résultats de la recherche :</h2>
+    <ul>
+      {% for produit in produits %}
+      <li>
+        {{ produit.nom }} - {{ produit.nutriscore }} - {{ produit.categorie }}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </body>
+</html>
