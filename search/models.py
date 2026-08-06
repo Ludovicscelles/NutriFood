@@ -18,17 +18,27 @@ class Produit(models.Model):
     ("E", "E")
   ]
 
+  code = models.CharField(
+    max_length=50,
+    unique=True,
+  )
+
   nom = models.CharField(
      max_length=200,
      default="Produit inconnu",
      )
+  
   ingredients = models.TextField(blank=True)
+
   nutriscore = models.CharField(
     max_length=1,
     choices=NUTRISCORE_CHOICES,
     default="E",
   )
-  categorie = models.CharField(max_length=200, blank=True)
+  categorie = models.CharField(
+     max_length=200, 
+     blank=True,
+  )
 
   # The __str__ method is a special method in Python that returns a string representation of an object.
   def __str__(self):
