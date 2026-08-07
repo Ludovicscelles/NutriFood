@@ -1,6 +1,6 @@
 # render is a function that takes a request object and a template name, 
 # and returns an HttpResponse object with the rendered template.
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # import the Produit model from the models.py file in the same directory
 from .models import Produit
 
@@ -27,4 +27,18 @@ def recherche_produit(request):
             'query': query,
             'produits': produits
             },
+    )
+
+def produit_detail(request, barcode):
+    # get the product object from the database using the barcode parameter passed in the URL
+    # if the product does not exist, return a 404 error page
+    produit = get_object_or_404(Produit, code=barcode)
+
+    # render the produit_detail.html template with the product object as context
+    return render (
+        request,
+        'search/produit_detail.html',
+        {
+            'article': produit
+        }
     )
