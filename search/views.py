@@ -12,12 +12,16 @@ def index(request):
 # The recherche_produit function is a view that handles the search functionality for products.
 def recherche_produit(request):
     # get the search query from the request object using the GET method
-    query = request.GET.get('q')
+    query = request.GET.get('q', '').strip()
 
-    # filter the Produit objects based on the search query using the icontains lookup
-    produits = Produit.objects.filter(
-        nom__icontains=query
-    )
+    if query:
+        # if the query is not empty, filter the Produit objects based on the search query using the icontains lookup
+        produits = Produit.objects.filter(
+            nom__icontains=query
+        )
+    else:
+        # if the query is empty, return an empty queryset
+        produits = Produit.objects.none()
 
     # render the resultats.html template with the filtered products as context
     return render(

@@ -27,6 +27,11 @@ class Produit(models.Model):
      max_length=200,
      default="Produit inconnu",
      )
+
+  marque = models.CharField(
+    max_length=200,
+    blank=True,
+  )
   
   ingredients = models.TextField(blank=True)
 
