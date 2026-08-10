@@ -1,56 +1,54 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detail de l'article {{ article.nom }}</title>
-    <link rel="stylesheet" href="{% static 'search/produit_detail.css' %}">
-</head>
-<body>
-
+    <link
+      rel="stylesheet"
+      href="{% static 'search/style_produit_detail.css' %}"
+    />
+  </head>
+  <body>
     <div class="container">
-        <a href="{% url 'search:index' %}" class="back-link">
-            Retour à la page d'accueil
-        </a>
+      <a href="{% url 'search:index' %}" class="back-link">
+        Retour à la page d'accueil
+      </a>
 
-        <article>
+      <article class="card">
+        <h1>{{ article.nom }}</h1>
 
-            <h1>{{ article.nom }}</h1>
+        <div class="code">Article n° {{ article.code }}</div>
 
-            <div class="code">
-                Article n° {{ article.code }}
-            </div>
+        <div class="info">
+          <div class="label">Marque :</div>
+          <div>{{ article.marque }}</div>
+        </div>
 
-            <div class="info">
-                <div class="label"> Marque : </div>
-                <div>{{ article.marque }}</div>
-            </div>
+        <div class="info">
+          <div class="label">Catégorie(s) :</div>
+          <div>{{ article.categorie }}</div>
+        </div>
 
-            <div class="info">
-                <div class="label"> Catégorie(s) : </div>
-                <div>{{ article.categorie }}</div>
-            </div>
+        <div class="info">
+          <div class="label">Nutriscore :</div>
+          <div>
+            <span class="nutriscore">{{ article.nutriscore }}</span>
+          </div>
+        </div>
 
-            <div class="info">
-                <div class="label"> Nutriscore : </div>
-                <span>{{ article.nutriscore }}</span>
-            </div>
+        <div class="info">
+          <div class="label">Code barre :</div>
+          <div>{{ article.code }}</div>
+        </div>
 
-            <div class="info">
-                <div class="label"> Code barre : </div>
-                <div>{{ article.code }}</div>
-            </div>
-
-            <div class="info">
-                <div class="label"> Ingrédients : </div>
-                <div>{{ article.ingredients }}</div>
-            </div>
-
-        </article>
-
+        <div class="info">
+          <div class="label">Ingrédients :</div>
+          <div class="ingredients">{{ article.ingredients }}</div>
+        </div>
+      </article>
     </div>
-
-</body>
+  </body>
 </html>
