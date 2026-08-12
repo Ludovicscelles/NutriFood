@@ -17,6 +17,7 @@ class Command(BaseCommand):
       "en:white-chocolates",
       "en:chocolate-spreads",
       "en:chocolate-biscuits",
+      "en:colas",
     ]
 
     # Define the fields to retrieve from the API for each product.

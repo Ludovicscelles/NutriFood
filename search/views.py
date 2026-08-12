@@ -46,3 +46,36 @@ def produit_detail(request, barcode):
             'article': produit
         }
     )
+
+
+def alternative_produit(request):
+    query = request.GET.get('q', '').strip()
+
+    produit = None
+    alternative = None
+
+    if query:
+
+        produit = Produit.objects.filter(
+            nom__icontains=query
+        ).first()
+    
+        if produit:
+            alternative = Produit.objects.filter(
+                nom__icontains=query
+            ).exclude(
+                id=produit.id
+            ).order_by('nutriscore').first()
+
+    return render(
+        request,
+        'search/alternative.html',
+        {
+            'query': query,
+            'produit': produit,
+            'alternative': alternative,
+        }
+    )
+
+
+    

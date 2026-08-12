@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Résultats de la recherche</title>
+    <link rel="stylesheet" href="{% static 'search/style_produit_detail.css' %}">
+</head>
+<body>
+    <h1>Résultats de la recherche pour "{{ query }}"</h1>
+    {% if produits %}
+        <ul>
+            {% for produit in produits %}
+                <li class="produit-item">
+                    <div class="card">
+                        <h2>{{ produit.nom }}</h2>
+                        <p>Nutriscore: {{ produit.nutriscore }}</p>
+                        <p>Catégorie: {{ produit.categorie }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun produit trouvé pour la recherche "{{ query }}".</p>
+    {% endif %}
+    <a href="{% url 'search:index' %}">Retour à la recherche</a>
+</body>
+</html>
