@@ -21,7 +21,7 @@ class Command(BaseCommand):
 
     # Define the fields to retrieve from the API for each product.
     fields = (
-      "code,product_name_fr,product_name,"
+      "code,product_name_fr,product_name,brands,"
       "ingredients_text,ingredients_text_fr,"
       "nutriscore_grade,categories_tags"
     )
@@ -113,6 +113,8 @@ class Command(BaseCommand):
       or "Produit inconnu"
     )
 
+    marque = product.get("brands") or "Marque inconnue"
+
     ingredients = (
       product.get("ingredients_text_fr") 
       or product.get("ingredients_text") 
@@ -133,6 +135,7 @@ class Command(BaseCommand):
       code=code,
       defaults={
         "nom": nom[:200],
+        "marque": marque[:200],
         "ingredients": ingredients,
         "nutriscore": grade,
         "categorie": categorie,

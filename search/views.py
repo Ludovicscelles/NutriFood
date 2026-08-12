@@ -1,6 +1,6 @@
 # render is a function that takes a request object and a template name, 
 # and returns an HttpResponse object with the rendered template.
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # import the Produit model from the models.py file in the same directory
 from .models import Produit
 
@@ -12,12 +12,16 @@ def index(request):
 # The recherche_produit function is a view that handles the search functionality for products.
 def recherche_produit(request):
     # get the search query from the request object using the GET method
-    query = request.GET.get('q')
+    query = request.GET.get('q', '').strip()
 
-    # filter the Produit objects based on the search query using the icontains lookup
-    produits = Produit.objects.filter(
-        nom__icontains=query
-    )
+    if query:
+        # if the query is not empty, filter the Produit objects based on the search query using the icontains lookup
+        produits = Produit.objects.filter(
+            nom__icontains=query
+        )
+    else:
+        # if the query is empty, return an empty queryset
+        produits = Produit.objects.none()
 
     # render the resultats.html template with the filtered products as context
     return render(
@@ -27,4 +31,18 @@ def recherche_produit(request):
             'query': query,
             'produits': produits
             },
+    )
+
+def produit_detail(request, barcode):
+    # get the product object from the database using the barcode parameter passed in the URL
+    # if the product does not exist, return a 404 error page
+    produit = get_object_or_404(Produit, code=barcode)
+
+    # render the produit_detail.html template with the product object as context
+    return render (
+        request,
+        'search/produit_detail.html',
+        {
+            'article': produit
+        }
     )
