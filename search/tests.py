@@ -1,3 +1,84 @@
+# import the necessary modules for testing
 from django.test import TestCase
+from django.urls import reverse
+
+from .models import Produit
 
 # Create your tests here.
+
+class AlternativeProduitTests(TestCase):
+
+  def test_alternative_avec_meilleur_nutriscore(self):
+    produit = Produit.objects.create(
+      nom="Céréales chocolatées",
+      marque="Marque A",
+      code="1234567890123",
+      nutriscore="D",
+    )
+
+    meilleur_produit = Produit.objects.create(
+      nom="Céréales chocolatées allégées",
+      marque="Marque B",
+      code="9876543210987",
+      nutriscore="B",
+    )
+
+    Produit.objects.create(
+      nom="Céréales chocolatées sucrées",
+      marque="Marque C",
+      code="4567890123456",
+      nutriscore="E",
+    )
+
+    response = self.client.get(
+      reverse("search:alternative"),
+      {"q": "Céréales chocolatées"},
+    )
+
+    self.assertEqual(response.status_code, 200)
+
+    self.assertTemplateUsed(
+      response,
+      "search/alternative.html"
+    )
+
+    self.assertEqual(
+      response.context["produit"],
+      produit
+    )
+
+    self.assertEqual(
+      response.context["alternative"],
+      meilleur_produit
+    )
+
+  def test_aucune_alternative_disponible(self):
+    produit = Produit.objects.create(
+      nom="Chips nature",
+      marque="Marque D",
+      code="1111111111111",
+      nutriscore="A",
+      )
+
+    response = self.client.get(
+      reverse("search:alternative"),
+      {"q": "Chips nature"},
+    )
+
+    self.assertEqual(response.status_code, 200)
+
+    self.assertTemplateUsed(
+      response,
+      "search/alternative.html"
+    )
+
+    self.assertEqual(
+      response.context["produit"],
+      produit
+    )
+
+    self.assertIsNone(
+      response.context["alternative"]
+    )
+
+  
