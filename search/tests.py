@@ -6,8 +6,10 @@ from .models import Produit
 
 # Create your tests here.
 
+
 class AlternativeProduitTests(TestCase):
 
+  # Test that the alternative view returns the correct context data when a product with a better nutriscore is found
   def test_alternative_avec_meilleur_nutriscore(self):
     produit = Produit.objects.create(
       nom="Céréales chocolatées",
@@ -75,6 +77,27 @@ class AlternativeProduitTests(TestCase):
     self.assertEqual(
       response.context["produit"],
       produit
+    )
+
+    self.assertIsNone(
+      response.context["alternative"]
+    )
+
+  def test_produit_inexistant(self):
+    response = self.client.get(
+      reverse("search:alternative"),
+      {"q": "Produit inexistant"},
+    )
+
+    self.assertEqual(response.status_code, 200)
+
+    self.assertTemplateUsed(
+      response,
+      "search/alternative.html"
+    )
+
+    self.assertIsNone(
+      response.context["produit"]
     )
 
     self.assertIsNone(
