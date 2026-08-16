@@ -67,6 +67,9 @@ def alternative_produit(request):
                 id=produit.id
             ).order_by('nutriscore').first()
 
+        if alternative and alternative.nutriscore >= produit.nutriscore:
+            alternative = None
+
     return render(
         request,
         'search/alternative.html',

@@ -59,7 +59,7 @@ class AlternativeProduitTests(TestCase):
       nom="Chips nature",
       marque="Marque D",
       code="1111111111111",
-      nutriscore="A",
+      nutriscore="C",
       )
 
     response = self.client.get(
@@ -104,4 +104,38 @@ class AlternativeProduitTests(TestCase):
       response.context["alternative"]
     )
 
-  
+  def test_aucune_alternative_si_produit_est_meilleur(self):
+    produit = Produit.objects.create(
+      nom="Boisson sucrée",
+      marque="Marque E",
+      code="2222222222222",
+      nutriscore="C",
+    )
+
+    Produit.objects.create(
+      nom="Boisson sucrée light",
+      marque="Marque F",
+      code="3333333333333",
+      nutriscore="D",
+    )
+
+    response = self.client.get(
+      reverse("search:alternative"),
+      {"q": "Boisson sucrée"},
+    )
+
+    self.assertEqual(response.status_code, 200)
+
+    self.assertTemplateUsed(
+      response,
+      "search/alternative.html"
+    )
+
+    self.assertEqual(
+      response.context["produit"],
+      produit
+    )
+
+    self.assertIsNone(
+      response.context["alternative"]
+    )
