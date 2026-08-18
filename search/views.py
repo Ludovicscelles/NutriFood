@@ -48,6 +48,9 @@ def produit_detail(request, barcode):
     )
 
 
+def est_meilleur_nutriscore(alternative, produit):
+    return alternative.nutriscore < produit.nutriscore
+
 def alternative_produit(request):
     query = request.GET.get('q', '').strip()
 
@@ -67,9 +70,9 @@ def alternative_produit(request):
                 id=produit.id
             ).order_by('nutriscore').first()
 
-        if alternative and alternative.nutriscore >= produit.nutriscore:
-            alternative = None
-
+            if alternative and not est_meilleur_nutriscore(alternative, produit):
+                alternative = None
+        
     return render(
         request,
         'search/alternative.html',
