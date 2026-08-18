@@ -47,7 +47,6 @@ def produit_detail(request, barcode):
         }
     )
 
-
 def est_meilleur_nutriscore(alternative, produit):
     return alternative.nutriscore < produit.nutriscore
 
