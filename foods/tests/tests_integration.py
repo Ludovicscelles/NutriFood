@@ -83,6 +83,12 @@ class AlternativeProduitTests(TestCase):
       response.context["alternative"]
     )
 
+    # other way to check if the alternative is None
+    # self.assertEqual(
+    #   response.context["alternative"],
+    #   None
+    # )
+
   def test_produit_inexistant(self):
     response = self.client.get(
       reverse("search:alternative"),
