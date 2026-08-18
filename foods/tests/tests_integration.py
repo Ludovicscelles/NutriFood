@@ -2,7 +2,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import Produit
+from search.models import Produit
 
 # Create your tests here.
 
