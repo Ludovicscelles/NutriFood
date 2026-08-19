@@ -9,10 +9,14 @@ from .models import Produit
 def index(request):
     return render(request, 'search/index.html')
 
+
+def nettoyer_recherche(query):
+    return query.strip()
+
 # The recherche_produit function is a view that handles the search functionality for products.
 def recherche_produit(request):
-    # get the search query from the request object using the GET method
-    query = request.GET.get('q', '').strip()
+    query = nettoyer_recherche(request.GET.get('q', ''))
+
 
     if query:
         # if the query is not empty, filter the Produit objects based on the search query using the icontains lookup
@@ -60,7 +64,7 @@ def est_meilleur_nutriscore(alternative, produit):
     return ORDRE_NUTRISCORE[alternative.nutriscore] < ORDRE_NUTRISCORE[produit.nutriscore]
 
 def alternative_produit(request):
-    query = request.GET.get('q', '').strip()
+    query = nettoyer_recherche(request.GET.get('q', ''))
 
     produit = None
     alternative = None
