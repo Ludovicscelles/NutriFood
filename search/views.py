@@ -47,8 +47,17 @@ def produit_detail(request, barcode):
         }
     )
 
+
+ORDRE_NUTRISCORE = {
+    "A": 1,
+    "B": 2,
+    "C": 3,
+    "D": 4,
+    "E": 5,
+}
+
 def est_meilleur_nutriscore(alternative, produit):
-    return alternative.nutriscore < produit.nutriscore
+    return ORDRE_NUTRISCORE[alternative.nutriscore] < ORDRE_NUTRISCORE[produit.nutriscore]
 
 def alternative_produit(request):
     query = request.GET.get('q', '').strip()
