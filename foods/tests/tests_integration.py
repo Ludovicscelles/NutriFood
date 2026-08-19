@@ -2,7 +2,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import Produit
+from search.models import Produit
 
 # Create your tests here.
 
@@ -82,6 +82,12 @@ class AlternativeProduitTests(TestCase):
     self.assertIsNone(
       response.context["alternative"]
     )
+
+    # other way to check if the alternative is None
+    # self.assertEqual(
+    #   response.context["alternative"],
+    #   None
+    # )
 
   def test_produit_inexistant(self):
     response = self.client.get(
