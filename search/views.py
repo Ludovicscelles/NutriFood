@@ -63,6 +63,15 @@ ORDRE_NUTRISCORE = {
 def est_meilleur_nutriscore(alternative, produit):
     return ORDRE_NUTRISCORE[alternative.nutriscore] < ORDRE_NUTRISCORE[produit.nutriscore]
 
+def alternative_valide(produit, alternative):
+    if alternative is None:
+        return False
+
+    return est_meilleur_nutriscore(
+        alternative,
+        produit
+    )
+
 def alternative_produit(request):
     query = nettoyer_recherche(request.GET.get('q', ''))
 
@@ -82,9 +91,9 @@ def alternative_produit(request):
                 id=produit.id
             ).order_by('nutriscore').first()
 
-            if alternative and not est_meilleur_nutriscore(alternative, produit):
+            if not alternative_valide(produit, alternative):
                 alternative = None
-        
+
     return render(
         request,
         'search/alternative.html',
