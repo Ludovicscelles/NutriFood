@@ -6,8 +6,8 @@ from search.models import Produit
 
 class RechercheProduitTest(TestCase):
 
-  def test_recherche_retourne_produit_correspondant(self):
-    produit = Produit.objects.create(
+  def setUp(self):
+    self.produit = Produit.objects.create(
       code="1234567890123",
       nom="Céréales chocolatées",
       marque="La Fabrique à Céréales",
@@ -16,6 +16,8 @@ class RechercheProduitTest(TestCase):
       categorie="Petit-déjeuner",
     )
 
+  def test_recherche_retourne_produit_correspondant(self):
+   
     response = self.client.get(
     reverse("search:recherche_produit"),
     {"q": "Céréales chocolatées"}
@@ -29,20 +31,12 @@ class RechercheProduitTest(TestCase):
     )
 
     self.assertIn(
-      produit,
+      self.produit,
       response.context["produits"]
     )
 
   def test_recherche_insensible_a_la_casse(self):
-    produit = Produit.objects.create(
-      code="1234567890123",
-      nom="Céréales chocolatées",
-      marque="La Fabrique à Céréales",
-      ingredients="Céréales, sucre, chocolat",
-      nutriscore="D",
-      categorie="Petit-déjeuner",
-    )
-
+    
     response = self.client.get(
       reverse("search:recherche_produit"),
       {"q": "CéRéALeS"},
@@ -55,7 +49,7 @@ class RechercheProduitTest(TestCase):
     )
 
     self.assertIn(
-      produit,
+      self.produit,
       response.context["produits"]
     )
     
