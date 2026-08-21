@@ -79,4 +79,27 @@ class RechercheProduitTest(TestCase):
     # )
 
     
-    
+  def test_recherche_ignore_espaces_avant_apres(self):
+
+    response = self.client.get(
+      reverse("search:recherche_produit"),
+      {"q": " Céréales Chocolatées "}
+    )
+
+    self.assertEqual(response.status_code, 200)
+
+    self.assertTemplateUsed(
+      response,
+      "search/resultats.html"
+    )
+
+    self.assertIn(
+      self.produit,
+      response.context["produits"]
+    )
+
+    self.assertEqual(
+      response.context["query"],
+      "Céréales Chocolatées"
+    )
+
