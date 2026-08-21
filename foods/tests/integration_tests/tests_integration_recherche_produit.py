@@ -17,8 +17,8 @@ class RechercheProduitTest(TestCase):
     )
 
     response = self.client.get(
-      reverse('search:recherche_produit'),
-      {"q": "Céréales chocolatées"}
+    reverse("search:recherche_produit"),
+    {"q": "Céréales chocolatées"}
     )
 
     self.assertEqual(response.status_code, 200)
@@ -29,8 +29,34 @@ class RechercheProduitTest(TestCase):
     )
 
     self.assertIn(
-
       produit,
       response.context["produits"]
     )
+
+  def test_recherche_insensible_a_la_casse(self):
+    produit = Produit.objects.create(
+      code="1234567890123",
+      nom="Céréales chocolatées",
+      marque="La Fabrique à Céréales",
+      ingredients="Céréales, sucre, chocolat",
+      nutriscore="D",
+      categorie="Petit-déjeuner",
+    )
+
+    response = self.client.get(
+      reverse("search:recherche_produit"),
+      {"q": "CéRéALeS"},
+    )
+
+    self.assertEqual(response.status_code, 200)
+    self.assertTemplateUsed(
+      response,
+      "search/resultats.html"
+    )
+
+    self.assertIn(
+      produit,
+      response.context["produits"]
+    )
+    
 
