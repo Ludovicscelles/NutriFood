@@ -1,0 +1,36 @@
+{% load static %}
+
+<!doctype html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Résultats de la recherche</title>
+  <link
+    rel="stylesheet"
+    href="{% static 'search/style_produit_detail.css' %}"
+  />
+</head>
+<body>
+  <form method="get" action="{% url 'search:alternative' %}">
+    <label for="q">Produit à améliorer</label>
+    <input type="text" id="q" name="q" />
+    <button type="submit">Trouver une meilleure alternative</button>
+  </form>
+
+  <h2>Produit recherché</h2>
+  <p>{{ produit.nom }} - Nutriscore {{ produit.nutriscore }}</p>
+
+  <h2>Meilleures alternatives</h2>
+
+  {% if alternative %}
+
+  <div class="card">
+    <h2>{{ alternative.nom }}</h2>
+    <p>Nutriscore: {{ alternative.nutriscore }}</p>
+    <p>Catégorie: {{ alternative.categorie }}</p>
+  </div>
+
+  {% else %}
+  <p>Aucune alternative trouvée pour le produit "{{ produit.nom }}".</p>
+  {% endif %}
+  <a href="{% url 'search:index' %}">Retour à la recherche</a>
+</body>

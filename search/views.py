@@ -9,10 +9,14 @@ from .models import Produit
 def index(request):
     return render(request, 'search/index.html')
 
+
+def nettoyer_recherche(query):
+    return query.strip()
+
 # The recherche_produit function is a view that handles the search functionality for products.
 def recherche_produit(request):
-    # get the search query from the request object using the GET method
-    query = request.GET.get('q', '').strip()
+    query = nettoyer_recherche(request.GET.get('q', ''))
+
 
     if query:
         # if the query is not empty, filter the Produit objects based on the search query using the icontains lookup
@@ -46,3 +50,59 @@ def produit_detail(request, barcode):
             'article': produit
         }
     )
+
+
+ORDRE_NUTRISCORE = {
+    "A": 1,
+    "B": 2,
+    "C": 3,
+    "D": 4,
+    "E": 5,
+}
+
+def est_meilleur_nutriscore(alternative, produit):
+    return ORDRE_NUTRISCORE[alternative.nutriscore] < ORDRE_NUTRISCORE[produit.nutriscore]
+
+def alternative_valide(produit, alternative):
+    if alternative is None:
+        return False
+
+    return est_meilleur_nutriscore(
+        alternative,
+        produit
+    )
+
+def alternative_produit(request):
+    query = nettoyer_recherche(request.GET.get('q', ''))
+
+    produit = None
+    alternative = None
+
+    if query:
+
+        produit = Produit.objects.filter(
+            nom__icontains=query
+        ).first()
+    
+        if produit:
+            alternative = Produit.objects.filter(
+                nom__icontains=query
+            ).exclude(
+                id=produit.id
+            ).order_by('nutriscore').first()
+
+            if not alternative_valide(produit, alternative):
+                alternative = None
+
+    return render(
+        request,
+        'search/alternative.html',
+        {
+            'query': query,
+            'produit': produit,
+            'alternative': alternative,
+        }
+    )
+
+
+    
