@@ -17,6 +17,7 @@
                         <h2>{{ produit.nom }}</h2>
                         <p>Nutriscore: {{ produit.nutriscore }}</p>
                         <p>Catégorie: {{ produit.categorie }}</p>
+                        <a href="{% url 'search:produit_detail' produit.code %}">Voir les détails</a>
                     </div>
                 </li>
             {% endfor %}
@@ -24,6 +25,6 @@
     {% else %}
         <p>Aucun produit trouvé pour la recherche "{{ query }}".</p>
     {% endif %}
-    <a href="{% url 'search:index' %}">Retour à la recherche</a>
+    <a href="{% url 'search:recherche_produit' %}">Retour à la recherche</a>
 </body>
 </html>
