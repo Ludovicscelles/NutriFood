@@ -23,3 +23,9 @@ def test_rechercher_produit(page: Page):
 
   expect(page.locator("h1")).to_have_text('Résultats de la recherche pour "Coca-Cola" ')
 
+  produits = page.locator(".produit-item")
+
+  expect(produits).to_have_count(3)
+
+  expect(produits.first).to_contain_text("Coca-Cola")
+
