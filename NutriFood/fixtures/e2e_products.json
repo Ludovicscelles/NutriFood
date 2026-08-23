@@ -34,5 +34,77 @@
       "nutriscore": "E",
       "categorie": "Boissons"
     }
+  },
+  {
+    "model": "search.produit",
+    "pk": 4,
+    "fields": {
+      "code": "4444444444444",
+      "nom": "Extra fondant lait",
+      "marque": "Lindt",
+      "ingredients": "Sucre, beurre de cacao, lait entier en poudre, pâte de cacao, lait écrémé en poudre, émulsifiant (lécithine de soja), arôme naturel de vanille.",
+      "nutriscore": "D",
+      "categorie": "Chocolats"
+    }
+  },
+  {
+    "model": "search.produit",
+    "pk": 5,
+    "fields": {
+      "code": "5555555555555",
+      "nom": "Extra fondant noir",
+      "marque": "Lindt",
+      "ingredients": "Sucre, pâte de cacao, beurre de cacao, émulsifiant (lécithine de soja), arôme naturel de vanille.",
+      "nutriscore": "C",
+      "categorie": "Chocolats"
+    }
+  },
+  {
+    "model": "search.produit",
+    "pk": 6,
+    "fields": {
+      "code": "6666666666666",
+      "nom": "Extra fondant blanc",
+      "marque": "Lindt",
+      "ingredients": "Sucre, beurre de cacao, lait entier en poudre, émulsifiant (lécithine de soja), arôme naturel de vanille.",
+      "nutriscore": "E",
+      "categorie": "Chocolats"
+    }
+  },
+  {
+    "model": "search.produit",
+    "pk": 7,
+    "fields": {
+      "code": "7777777777777",
+      "nom": "Orangina",
+      "marque": "Orangina",
+      "ingredients": "Eau, sucre, jus d'orange à base de concentré (12%), jus de citron à base de concentré (2%), pulpe d'orange, arômes naturels, acidifiant (acide citrique), gaz carbonique.",
+      "nutriscore": "D",
+      "categorie": "Boissons"
+    }
+  },
+  {
+    "model": "search.produit",
+    "pk": 8,
+    "fields": {
+      "code": "8888888888888",
+      "nom": "Orangina Light",
+      "marque": "Orangina",
+      "ingredients": "Eau, édulcorants (aspartame, acésulfame K), jus d'orange à base de concentré (12%), jus de citron à base de concentré (2%), pulpe d'orange, arômes naturels, acidifiant (acide citrique), gaz carbonique.",
+      "nutriscore": "C",
+      "categorie": "Boissons"
+    }
+  },
+  {
+    "model": "search.produit",
+    "pk": 9,
+    "fields": {
+      "code": "9999999999999",
+      "nom": "Orangina Pamplemousse",
+      "marque": "Orangina",
+      "ingredients": "Eau, sucre, jus d'orange à base de concentré (12%), jus de pamplemousse à base de concentré (2%), pulpe d'orange, arômes naturels, acidifiant (acide citrique), gaz carbonique.",
+      "nutriscore": "C",
+      "categorie": "Boissons"
+    }
   }
 ]
