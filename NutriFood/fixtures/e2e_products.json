@@ -1,0 +1,38 @@
+[
+  {
+    "model": "search.produit",
+    "pk": 1,
+    "fields": {
+      "code": "1234567890123",
+      "nom": "Coca-Cola",
+      "marque": "Coca-Cola",
+      "ingredients": "Eau, sucre, colorant (caramel E150d), acidifiant (acide phosphorique), arômes naturels (dont caféine).",
+      "nutriscore": "E",
+      "categorie": "Boissons"
+    }
+  },
+  {
+    "model": "search.produit",
+    "pk": 2,
+    "fields": {
+      "code": "2222222222222",
+      "nom": "Coca-Cola Zero",
+      "marque": "Coca-Cola",
+      "ingredients": "Eau, colorant (caramel E150d), acidifiant (acide phosphorique), arômes naturels (dont caféine), édulcorants (aspartame, acésulfame K).",
+      "nutriscore": "B",
+      "categorie": "Boissons"
+    }
+  },
+  {
+    "model": "search.produit",
+    "pk": 3,
+    "fields": {
+      "code": "3333333333333",
+      "nom": "Coca-Cola Cherry",
+      "marque": "Coca-Cola",
+      "ingredients": "Eau, sucre, colorant (caramel E150d), acidifiant (acide phosphorique), arômes naturels (dont caféine), arôme de cerise.",
+      "nutriscore": "E",
+      "categorie": "Boissons"
+    }
+  }
+]
