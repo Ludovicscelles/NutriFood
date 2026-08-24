@@ -6,10 +6,12 @@
   <title>Résultats de la recherche</title>
   <link
     rel="stylesheet"
-    href="{% static 'search/style_produit_detail.css' %}"
+    href="{% static 'search/style_index.css' %}"
   />
 </head>
+
 <body>
+  <main>
   <form method="get" action="{% url 'search:alternative' %}">
     <label for="q">Produit à améliorer</label>
     <input type="text" id="q" name="q" />
@@ -33,4 +35,5 @@
   <p>Aucune alternative trouvée pour le produit "{{ produit.nom }}".</p>
   {% endif %}
   <a href="{% url 'search:index' %}">Retour à la recherche</a>
+  </main>
 </body>

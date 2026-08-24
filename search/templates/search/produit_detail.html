@@ -12,43 +12,45 @@
     />
   </head>
   <body>
-    <div class="container">
-      <a href="{% url 'search:index' %}" class="back-link">
-        Retour à la page d'accueil
-      </a>
+    <main>
+      <div class="container">
+        <a href="{% url 'search:index' %}" class="back-link">
+          Retour à la page d'accueil
+        </a>
 
-      <article class="card">
-        <h1>{{ article.nom }}</h1>
+        <article class="card">
+          <h1>{{ article.nom }}</h1>
 
-        <div class="code">Article n° {{ article.code }}</div>
+          <div class="code">Article n° {{ article.code }}</div>
 
-        <div class="info">
-          <div class="label">Marque :</div>
-          <div>{{ article.marque }}</div>
-        </div>
-
-        <div class="info">
-          <div class="label">Catégorie(s) :</div>
-          <div>{{ article.categorie }}</div>
-        </div>
-
-        <div class="info">
-          <div class="label">Nutriscore :</div>
-          <div>
-            <span class="nutriscore">{{ article.nutriscore }}</span>
+          <div class="info">
+            <div class="label">Marque :</div>
+            <div>{{ article.marque }}</div>
           </div>
-        </div>
 
-        <div class="info">
-          <div class="label">Code barre :</div>
-          <div>{{ article.code }}</div>
-        </div>
+          <div class="info">
+            <div class="label">Catégorie(s) :</div>
+            <div>{{ article.categorie }}</div>
+          </div>
 
-        <div class="info">
-          <div class="label">Ingrédients :</div>
-          <div class="ingredients">{{ article.ingredients }}</div>
-        </div>
-      </article>
-    </div>
+          <div class="info">
+            <div class="label">Nutriscore :</div>
+            <div>
+              <span class="nutriscore">{{ article.nutriscore }}</span>
+            </div>
+          </div>
+
+          <div class="info">
+            <div class="label">Code barre :</div>
+            <div>{{ article.code }}</div>
+          </div>
+
+          <div class="info">
+            <div class="label">Ingrédients :</div>
+            <div class="ingredients">{{ article.ingredients }}</div>
+          </div>
+        </article>
+      </div>
+    </main>
   </body>
 </html>

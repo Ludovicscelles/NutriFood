@@ -1,21 +1,28 @@
+{% load static %}
+
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <title>Nutrifood</title>
+    <link rel="stylesheet" href="{% static 'search/style_index.css' %}" />
   </head>
+
   <body>
-    <h1>Bienvenue sur Nutrifood</h1>
+    <main>
+      <h1>Bienvenue sur Nutrifood</h1>
 
-    <form method="get" action="{% url 'search:recherche_produit' %}">
-      <label for="q">Nom du produit :</label>
-      <input type="text" id="q" name="q" value="{{ query|default:'' }}" />
-      <button type="submit">Rechercher</button>
-    </form>
+      <form method="get" action="{% url 'search:recherche_produit' %}">
+        <label for="q">Nom du produit :</label>
 
-    <a href="{% url 'search:alternative' %}"
-      >Trouver une meilleure alternative</a>
+        <input type="text" id="q" name="q" value="{{ query|default:'' }}" />
 
+        <button type="submit">Rechercher</button>
+      </form>
 
+      <a href="{% url 'search:alternative' %}"
+        >Trouver une meilleure alternative</a
+      >
+    </main>
   </body>
 </html>
