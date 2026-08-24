@@ -28,6 +28,26 @@ h1 {
   color: #2f855a;
 }
 
+h2 {
+  margin-top: 28px;
+  margin-bottom: 1px;
+  color: #374151;
+}
+
+.card {
+  margin-top: 12px;
+  margin-bottom: 24px;
+  padding: 20px;
+  background-color: #f4f8f4;
+  border: 1px solid #d1e7d5;
+  border-radius: 12px;
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #2f855a;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -74,17 +94,17 @@ button:active {
 }
 
 a {
- display: block;
- padding: 12px 18px;
- text-align: center;
- text-decoration: none;
- border: 1px solid #2f855a;
- border-radius: 8px;
- color: #2f855a;
- font-weight: 600;
- transition:
-   background-color 0.2s,
-   color 0.2s;
+  display: block;
+  padding: 12px 18px;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid #2f855a;
+  border-radius: 8px;
+  color: #2f855a;
+  font-weight: 600;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
 }
 
 a:hover {
